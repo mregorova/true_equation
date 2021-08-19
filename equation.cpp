@@ -8,8 +8,7 @@
 
 int main()
 {
-    float a,b,c,d;
-    float x1, x2;
+    float a,b,c;
 
     printf("Enter a: ");
     scanf("%f", &a);
@@ -20,8 +19,10 @@ int main()
     printf("Enter c: ");
     scanf("%f", &c);
 
+    float d;
     d = pow(b,2) - 4*a*c;
 
+    float x1, x2;
     x1 = (-b + sqrt(d)) / (a*2);
     x2 = (-b - sqrt(d)) / (a*2);
 

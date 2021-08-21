@@ -17,19 +17,20 @@ int main() {
     printf("Enter c: ");
     scanf("%f", &c);
 
-    float x = 0;
     if (a == 0) { //checking if our equation is quadratic
-        x = -c / b;
+        float x4 = 0;
+        x4 = -c / b;
 
-        printf("x = %f", x);
+        printf("x = %f", x4);
     } else {
         float d = 0;
         d = pow(b, 2) - 4 * a * c; //counting discriminant
         if (d >= 0) { //discovering different types of solutions
             if (d == 0) {
-                x = (-b) / (a * 2);
+                float x3 = 0;
+                x3 = (-b) / (a * 2);
 
-                printf("x = %f", x);
+                printf("x = %f", x3);
             } else {
                 float x1 = 0;
                 x1 = (-b + sqrt(d)) / (a * 2);

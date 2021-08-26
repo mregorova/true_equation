@@ -1,9 +1,17 @@
+//! @file equation.cpp
+//! @mainpage Programm working with square equations
+//! - equation.cpp
+//!@author Egorova MS
+//!@brief Used for solving square equations
+
 #define _CRT_SECURE_NO_WARNINGS // turning off the warnings to make this thing work
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <assert.h>
+
+const double precision = 0.000000001;
 
 /*
 double a = 0,  b = 0, c = 0;
@@ -17,6 +25,11 @@ double a = 0,  b = 0, c = 0;
 double a = 0,  b = 0, c = 0;
 double a = 0,  b = 0, c = 0;
 */
+
+/**
+    void flushInput()
+    ! It is used for clearing the buffer, which allows to scan vals many times
+    */
 
 // Keep reading from input stream until a newline is read
 void flushInput()
@@ -32,11 +45,42 @@ void flushInput()
     } while (c != '\n');
 }
 
+/**
+    int cmp_doubles(double num1, double num2)
+    ! It is used for comparing two double numbers
+    @param[in] num1 is first comparing number
+    @param[in] num2 is second comparing number
+    @param[out] 1 - numbers are equal
+    @param[out] 0 - numbers aren't equal
+    */
+
+int cmp_doubles(double num1, double num2)
+{
+    if (fabs(num1 - num2) < precision)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+/**
+    int linear(double a, double b, double c, double* x1)
+    ! Function for linear equation
+
+    !@param[in] a is first coef
+    !@param[in] b is second coef
+    !@param[in] c is third coef
+    !@param[out] x1 is the solution
+    */
+
 int linear(double a, double b, double c, double* x1)
 {
-    if (b == 0)
+    if (cmp_doubles(b, 0))
     {
-        if (c == 0)
+        if (cmp_doubles(c, 0))
         {
             return -1;
         }
@@ -56,12 +100,33 @@ int linear(double a, double b, double c, double* x1)
     return 777;
 }
 
+/**
+    double discriminant(double a, double b, double c)
+    ! Function for counting discriminant
+
+    !@param[in] a is first coef
+    !@param[in] b is second coef
+    !@param[in] c is third coef
+    !@param[out] d is the discriminant
+    */
+
 double discriminant(double a, double b, double c)
 {
     double d = pow(b, 2) - 4 * a * c;
 
     return d;
 }
+
+/**
+    int quadratic(double a, double b, double c, double* x1, double* x2)
+    ! Function for square equation
+
+    !@param[in] a is first coef
+    !@param[in] b is second coef
+    !@param[in] c is third coef
+    !@param[out] x1 is the first solution
+    !@param[out] x2 is the second solution
+    */
 
 int quadratic(double a, double b, double c, double* x1, double* x2)
 {
@@ -70,7 +135,7 @@ int quadratic(double a, double b, double c, double* x1, double* x2)
 
     if (d >= 0)
     { // discovering different types of solutions
-        if (d == 0)
+        if (cmp_doubles(d, 0))
         {
             *x1 = (-b) / (a * 2);
 
@@ -89,10 +154,21 @@ int quadratic(double a, double b, double c, double* x1, double* x2)
     return 0;
 }
 
+/**
+    int solve(double a, double b, double c, double* x1, double* x2)
+    ! Function for the whole solution
+
+    !@param[in] a is first coef
+    !@param[in] b is second coef
+    !@param[in] c is third coef
+    !@param[out] x1 is the first solution
+    !@param[out] x2 is the second solution
+    */
+
 
 int solve(double a, double b, double c, double* x1, double* x2)
 {
-    if (a == 0)
+    if (cmp_doubles(a, 0))
     {
         return linear(a, b, c, x1);
     }
@@ -101,6 +177,11 @@ int solve(double a, double b, double c, double* x1, double* x2)
         return quadratic(a, b, c, x1, x2);
     }
 }
+
+/**
+    int main()
+    ! Entering the coefficients and getting the solutions
+    */
 
 int main() {
 
